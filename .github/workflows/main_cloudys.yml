@@ -26,7 +26,7 @@ jobs:
           yarn build 
         env:
           NOTION_PAGE_ID: ${{ secrets.NOTION_PAGE_ID }}
-
+          NEXT_PUBLIC_UTTERANCES_REPO: ${{ secrets.NEXT_PUBLIC_UTTERANCES_REPO }}
       - name: Zip artifact for deployment
         run: zip -r --symlinks release.zip . .next
 
