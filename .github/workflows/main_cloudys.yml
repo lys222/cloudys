@@ -27,6 +27,9 @@ jobs:
         env:
           NOTION_PAGE_ID: ${{ secrets.NOTION_PAGE_ID }}
           NEXT_PUBLIC_UTTERANCES_REPO: ${{ secrets.NEXT_PUBLIC_UTTERANCES_REPO }}
+          NEXT_PUBLIC_GOOGLE_MEASUREMENT_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_MEASUREMENT_ID}}
+          NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ secrets.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION}}
+
       - name: Zip artifact for deployment
         run: zip -r --symlinks release.zip . .next
 
