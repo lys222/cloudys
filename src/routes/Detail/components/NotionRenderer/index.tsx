@@ -15,6 +15,7 @@ import "prismjs/themes/prism-tomorrow.css"
 import "katex/dist/katex.min.css"
 import { FC } from "react"
 import styled from "@emotion/styled"
+import { pretendard } from "src/assets"
 
 const _NotionRenderer = dynamic(
   () => import("react-notion-x").then((m) => m.NotionRenderer),
@@ -22,7 +23,22 @@ const _NotionRenderer = dynamic(
 )
 
 const Code = dynamic(() =>
-  import("react-notion-x/build/third-party/code").then(async (m) => m.Code)
+  import("react-notion-x/build/third-party/code").then(async (m) => {
+    await Promise.all([
+      import("prismjs/components/prism-java.js"),
+      import("prismjs/components/prism-sql.js"),
+      import("prismjs/components/prism-python.js"),
+      import("prismjs/components/prism-bash.js"),
+      import("prismjs/components/prism-bicep.js"),
+      import("prismjs/components/prism-docker.js"),
+      import("prismjs/components/prism-kusto.js"),
+      import("prismjs/components/prism-json.js"),
+      import("prismjs/components/prism-log.js"),
+      import("prismjs/components/prism-rego.js"),
+      import("prismjs/components/prism-yaml.js")
+    ])
+    return m.Code as any
+  })
 )
 
 const Collection = dynamic(() =>
@@ -78,15 +94,25 @@ const NotionRenderer: FC<Props> = ({ recordMap }) => {
 
 export default NotionRenderer
 
-const StyledWrapper = styled.div`
-  /* // TODO: why render? */
-  .notion-collection-page-properties {
-    display: none !important;
-  }
-  .notion-page {
-    padding: 0;
-  }
-  .notion-list {
-    width: 100%;
-  }
-`
+  const StyledWrapper = styled.div`
+    /* // TODO: why render? */
+    .notion-collection-page-properties {
+      display: none !important;
+    }
+    .notion-page {
+      padding: 0;
+    }
+    .notion-code{
+      background-color: ${({ theme })  =>
+        theme === "dark" ? "#2d2d2d" : "#f7f6f3;" };
+    }
+    .notion{
+      font-family: ${pretendard.style.fontFamily};
+      color: ${({ theme })  =>
+        theme === "dark" ? "rgb(209 213 219)" : "rgb(107 114 128);" };
+      overflow-wrap: break-word;
+    }
+    .notion-list {
+      width: 100%;
+    }
+  `
