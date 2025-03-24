@@ -35,7 +35,8 @@ const Code = dynamic(() =>
       import("prismjs/components/prism-json.js"),
       import("prismjs/components/prism-log.js"),
       import("prismjs/components/prism-rego.js"),
-      import("prismjs/components/prism-yaml.js")
+      import("prismjs/components/prism-yaml.js"),
+      import("prismjs/components/prism-markdown.js")
     ])
     return m.Code as any
   })
