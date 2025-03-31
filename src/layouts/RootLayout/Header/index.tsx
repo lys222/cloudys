@@ -37,7 +37,7 @@ const StyledWrapper = styled.div`
 
 const HeaderWrapper = styled.div`
   padding: 10px 0;
-  background-color: ${({ theme }) => theme.colors.grayA1};
+  background-color: ${({ theme }) => theme.colors.gray2};
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   .container {
     display: flex;
