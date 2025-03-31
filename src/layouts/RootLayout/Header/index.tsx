@@ -5,7 +5,7 @@ import styled from "@emotion/styled"
 import { zIndexes } from "src/styles/zIndexes"
 
 type Props = {
-  fullWidth: boolean
+  fullWidth?: boolean
   readingProgress: number
 }
 
