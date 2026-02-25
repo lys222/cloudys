@@ -19,11 +19,13 @@ export const getPosts = async () => {
 
   const response = await api.getPage(id)
   id = idToUuid(id)
-  const collection = Object.values(response.collection)[0]?.value
+  const collectionValue = Object.values(response.collection)[0]?.value as any
+  const collection = collectionValue?.value ?? collectionValue
   const block = response.block
   const schema = collection?.schema
 
-  const rawMetadata = block[id].value
+  const blockValue = (block[id].value as any)?.value ?? block[id].value
+  const rawMetadata = blockValue
 
   // Check Type
   if (
@@ -32,27 +34,22 @@ export const getPosts = async () => {
   ) {
     return []
   } else {
-    // Construct Data
-    const pageIds = getAllPageIds(response)
-    const tempBlock = await (await api.getBlocks(pageIds)).recordMap.block
-
+    // Construct Data    const pageIds = getAllPageIds(response)
     const data = []
     for (let i = 0; i < pageIds.length; i++) {
       const id = pageIds[i]
-      const properties =
-        (await getPageProperties(id, tempBlock, schema)) || null
-      if (!tempBlock[id]) continue
-
+      const properties = (await getPageProperties(id, block, schema)) || null
       // Add fullwidth, createdtime to properties
+      const pageBlockValue = (block[id].value as any)?.value ?? block[id].value
       properties.createdTime = new Date(
-        tempBlock[id].value?.created_time
+        pageBlockValue?.created_time
       ).toString()
       properties.fullWidth =
-        (tempBlock[id].value?.format as any)?.page_full_width ?? false
+        (pageBlockValue?.format as any)?.page_full_width ?? false
 
       data.push(properties)
     }
-
+    
     // Sort by date
     data.sort((a: any, b: any) => {
       const dateA: any = new Date(a?.date?.start_date || a.createdTime)
