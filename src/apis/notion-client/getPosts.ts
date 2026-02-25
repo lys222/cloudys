@@ -34,7 +34,8 @@ export const getPosts = async () => {
   ) {
     return []
   } else {
-    // Construct Data    const pageIds = getAllPageIds(response)
+    // Construct Data
+    const pageIds = getAllPageIds(response)
     const data = []
     for (let i = 0; i < pageIds.length; i++) {
       const id = pageIds[i]
