@@ -8,9 +8,7 @@ async function getPageProperties(
   block: BlockMap,
   schema: CollectionPropertySchemaMap
 ) {
-  const api = new NotionAPI({
-    apiBaseUrl: "https://studys.notion.site/api/v3"
-  })
+  const api = new NotionAPI()
   let blockValue = block?.[id]?.value as any
   if (blockValue?.value) {
     blockValue = blockValue.value
